@@ -3,13 +3,14 @@ import { motion } from "framer-motion";
 const UserDetails = ({ user, onClose }) => {
     return (
     <motion.div
-        className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 bg-white"
+        className="fixed inset-0 flex items-center justify-center bg-opacity-50 bg-white"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
     >
         <motion.div
-            className="bg-white p-6 rounded shadow-lg max-w-sm w-full p-4 d-flex justify-content-center"
+            className="p-6 rounded shadow-lg max-w-sm w-full p-4 d-flex justify-content-center"
+            style={{backgroundColor: "#eee9f6"}}
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 50, opacity: 0 }}

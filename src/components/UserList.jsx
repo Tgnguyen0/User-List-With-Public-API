@@ -40,7 +40,7 @@ const UserList = () => {
                             <motion.li
                                 key={user.id}
                                 className="card p-3 border rounded shadow cursor-pointer hover:bg-gray-100"
-                                style={{width: "33.3%", height: "250px", marginRight: "4px", marginLeft: "4px"}}
+                                style={{backgroundColor: "#fef2cf", width: "33.3%", height: "250px", marginRight: "4px", marginLeft: "4px"}}
                                 onClick={() => setSelectedUser(user)}
                                 whileHover={{ scale: 1.02 }}
                             >
@@ -59,8 +59,7 @@ const UserList = () => {
                             (_, index) => (
                                 <button
                                     key={index}
-                                    className={`px-3 py-1 border rounded ${currentPage === index + 1 ? "text-white" : ""}`}
-                                    style={{}}
+                                    className={`px-3 py-1 border rounded ${currentPage === index + 1 ? "bg-primary text-white" : ""}`}
                                     onClick={() => setCurrentPage(index + 1)}
                                 >
                                     {index + 1}
