@@ -8,7 +8,7 @@ const UserList = () => {
     const [selectedUser, setSelectedUser] = useState(null);
     const [search, setSearch] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
-    const usersPerPage = 5;
+    const usersPerPage = 3;
     
     const filteredUsers = users.filter((user) =>
         user.name.toLowerCase().includes(search.toLowerCase())
@@ -19,52 +19,59 @@ const UserList = () => {
     const currentUsers = filteredUsers.slice(indexOfFirstUser,indexOfLastUser);
 
     return (
-        <div className="p-4">
-            <input
-            type="text"
-            placeholder="Tìm kiếm..."
-            className="border p-2 w-full mb-4"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            />
-
-        {loading ? (
-            <p className="text-center text-gray-500">Đang tải dữ liệu...</p>
-        ) : (
-            <>
-            <ul className="space-y-2">
-                {currentUsers.map((user) => (
-                <motion.li
-                    key={user.id}
-                    className="p-3 border rounded shadow cursor-pointer hover:bg-gray-100"
-                    onClick={() => setSelectedUser(user)}
-                    whileHover={{ scale: 1.02 }}
-                >
-                    <h2 className="font-bold">{user.name}</h2>`
-                    <p>Email: {user.email}</p>
-                    <p>City: {user.address.city}</p>
-                </motion.li>
-            ))}
-            </ul>
-
-            {/* Phân trang */}
-            <div className="flex justify-center mt-4 space-x-2">
-                {[...Array(Math.ceil(filteredUsers.length / usersPerPage))].map(
-                    (_, index) => (
-                        <button
-                        key={index}
-                        className={`px-3 py-1 border rounded ${currentPage === index + 1 ? "bg-blue-500 text-white" : ""}`}
-                        onClick={() => setCurrentPage(index + 1)}
-                        >
-                            {index + 1}
-                        </button>
-                    )
-                )}
+        <div className="p-4" style={{width: "1000px"}}>
+            <div>
+                <input
+                    type="text"
+                    placeholder="Tìm kiếm ..."
+                    className="border p-2 w-full mb-4 rounded-3 bg-white text-dark"
+                    style={{width: "100%"}}
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                />
             </div>
-        </>
-        )}
+
+            {loading ? (
+                <p className="text-center text-gray-500">Đang tải dữ liệu...</p>
+            ) : (
+                <div>
+                    <ul className="d-flex justify-content-start" style={{listStyle: "none", margin: "0", padding:"2px"}}>
+                        {currentUsers.map((user) => (
+                            <motion.li
+                                key={user.id}
+                                className="card p-3 border rounded shadow cursor-pointer hover:bg-gray-100"
+                                style={{width: "33.3%", height: "250px", marginRight: "4px", marginLeft: "4px"}}
+                                onClick={() => setSelectedUser(user)}
+                                whileHover={{ scale: 1.02 }}
+                            >
+                                <div class="card-body">
+                                    <h4 className="font-bold">{user.name}</h4>
+                                    <p class="card-text">Email: {user.email}</p>
+                                    <p class="card-text">City: {user.address.city}</p>
+                                </div>
+                            </motion.li>
+                        ))}
+                    </ul>
+
+                    {/* Phân trang */}
+                    <div className="d-flex justify-content-center m-4 space-x-2">
+                        {[...Array(Math.ceil(filteredUsers.length / usersPerPage))].map(
+                            (_, index) => (
+                                <button
+                                    key={index}
+                                    className={`px-3 py-1 border rounded ${currentPage === index + 1 ? "text-white" : ""}`}
+                                    style={{}}
+                                    onClick={() => setCurrentPage(index + 1)}
+                                >
+                                    {index + 1}
+                                </button>
+                            )
+                        )}
+                    </div>
+                </div>
+            )}
         
-        {selectedUser && <UserDetails user={selectedUser} onClose={() => setSelectedUser(null)} />}
+            {selectedUser && <UserDetails user={selectedUser} onClose={() => setSelectedUser(null)} />}
         </div>
     );
 };
